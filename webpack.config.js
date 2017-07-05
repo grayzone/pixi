@@ -1,18 +1,20 @@
-const path = require('path');
-var node_modules_dir = path.join(__dirname, 'node_modules');
+const path = require("path");
+var node_modules_dir = path.join(__dirname, "node_modules");
 
 var config = {
   entry: {
-    app: path.resolve(__dirname, 'jsx/main.jsx')
+    app: path.resolve(__dirname, "jsx/main.jsx")
   },
   output: {
-    filename: 'pack.js',
-    path: path.resolve(__dirname, 'static/dist')
+    filename: "pack.js",
+    path: path.resolve(__dirname, "static/dist")
   },
+ // node: {
+    // this is fot pixi.js
+//    fs: "empty"
+//  },
   resolve: {
-    extensions: [
-      '.js', '.jsx'
-    ],
+    extensions: [".js", ".jsx"],
     alias: {}
   },
   module: {
@@ -25,19 +27,30 @@ var config = {
             loader: "babel-loader"
           }
         ]
-      }, {
+      },
+      {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader?modules', 'postcss-loader']
-      }, {
+        use: ["style-loader", "css-loader?modules", "postcss-loader"]
+      },/*
+      {
+        test: /\.json$/,
+        use: ["json-loader"]
+      },
+      {
+        include: path.resolve(__dirname, "node_modules/pixi.js"),
+        use: ["transform-loader?brfs"]
+      },*/
+      {
         test: /\.less$/,
         use: [
-          'style-loader', {
-            loader: 'css-loader',
+          "style-loader",
+          {
+            loader: "css-loader",
             options: {
               importLoaders: 1
             }
           },
-          'less-loader'
+          "less-loader"
         ]
       }
     ]
